@@ -1,1 +1,3 @@
 # FileTransferOverTCP
+
+This is a simple file transfer application over a TCP connection. I built this after being frustrated uploading files I wanted to transfer from my virtual machine on windows to my Macbook. I found an amazing [repository](https://github.com/nikhilroxtomar/File-Transfer-using-TCP-Socket-in-Python3) for the starter code, and integrated an authentication scheme to ensure not everyone in my local network can use my active TCP port. I also realize this project could be a great way to demonstrate all my classroom learning in Network Security, so I plan to incrementally add functionalities with the passage of time.
