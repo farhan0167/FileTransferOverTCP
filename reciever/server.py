@@ -31,10 +31,17 @@ def main():
 
             """ Receiving the file data from the client. """
             #data = conn.recv(SIZE).decode(FORMAT)
-            data = conn.recv(SIZE)
-            print(f"[RECV] Receiving the file data.")
-            file.write(data)
-            conn.send("File data received".encode(FORMAT))
+            bytes_read = 0
+            #capable of transfering 1GB of data
+            while bytes_read<MAXSIZE:
+                data = conn.recv(SIZE)
+                #if there's no more data, simply exit
+                if len(data)==0:
+                    break
+                print(f"[RECV] Receiving the file data.")
+                file.write(data)
+                bytes_read += len(data)
+                conn.send(f"File data received {bytes_read} bytes".encode(FORMAT))
             """ Closing the file. """
             file.close()
 

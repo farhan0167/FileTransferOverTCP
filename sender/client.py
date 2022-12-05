@@ -10,7 +10,7 @@ IP = socket.gethostbyname(socket.gethostname())
 PORT = 4455
 ADDR = (IP, PORT)
 FORMAT = "utf-8"
-SIZE = 1024*1024
+SIZE = 1024
 
 def main():
     """ Staring a TCP socket. """
@@ -36,15 +36,19 @@ def main():
     print(f"[SERVER]: {msg}")
 
     """ Sending the file data to the server. """
-    #client.send(data.encode(FORMAT))
-    client.sendall(data)
-    msg = client.recv(SIZE).decode(FORMAT)
-    print(f"[SERVER]: {msg}")
+    bytes_sent = 0
+    while (data):
+        client.sendall(data)
+        bytes_sent += SIZE
+        msg = client.recv(SIZE).decode(FORMAT)
+        print(f"[SERVER]: {msg}")
+        data = file.read(SIZE)
 
     """ Closing the file. """
     file.close()
 
     """ Closing the connection from the server. """
+    #client.shutdown(socket.SHUT_RDWR)
     client.close()
 
 
